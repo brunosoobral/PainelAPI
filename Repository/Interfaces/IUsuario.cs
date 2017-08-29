@@ -12,7 +12,7 @@ namespace Repository.Interfaces
         Skype:      bruno.soobral
         E-mail:     bruno.soobral@gmail.com
     -----------------------------------------*/
-
+     
     public interface IUsuario
     {
         Usuario ObterPorLoginSenha(Usuario u);
