@@ -12,6 +12,9 @@ namespace Services
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(Startup.ConfigureWebApi);
+
+            //reconhecer a pasta /Areas 
             AreaRegistration.RegisterAllAreas();
         }
     }
