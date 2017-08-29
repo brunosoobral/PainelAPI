@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Entities;
 
 namespace Repository.Interfaces
-{
+{ 
     /*-----------------------------------------
         Autor:      Bruno Sobral                  
         Skype:      bruno.soobral
