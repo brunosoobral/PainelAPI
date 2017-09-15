@@ -401,6 +401,20 @@ namespace Business
                 Personagem.Tier4[2].Valor = BytesChar[0x20B];
                 Personagem.Tier4[3].Valor = BytesChar[0x1fc];
 
+                //Somando valores das magias.
+                var QtdTier1 = Personagem.Tier1.Sum(t => Convert.ToInt32(t.Valor));
+                var QtdTier2 = Personagem.Tier2.Sum(t => Convert.ToInt32(t.Valor));
+                var QtdTier3 = Personagem.Tier3.Sum(t => Convert.ToInt32(t.Valor));
+                var QtdTier4 = Personagem.Tier4.Sum(t => Convert.ToInt32(t.Valor));
+
+                //Tier1 até Tier3 (A distribuir)
+                int TotalPontosDisponivelSP = Funcoes.TotalPontosMagia(Personagem.Level, "SP");
+                Personagem.PontosRestanteSP = (TotalPontosDisponivelSP - (QtdTier1 + QtdTier2 + QtdTier3));
+
+                //Tier4 (A distribuir)
+                int TotalPontosDisponivelEP = Funcoes.TotalPontosMagia(Personagem.Level, "EP");
+                Personagem.PontosRestanteEP = (TotalPontosDisponivelEP - QtdTier4);
+
                 //Carregando clan do usuário..
                 //Criar no repositório..
             }
