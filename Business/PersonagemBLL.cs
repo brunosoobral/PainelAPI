@@ -137,6 +137,12 @@ namespace Business
                 string CaminhoNicknameChar = $@"{Funcoes.Caminho}\dataserver\userdata\{Funcoes.Diretorio(nickname)}\{nickname}.dat";
                 string CaminhoDeleteNicknameChar = $@"{Funcoes.Caminho}\dataserver\deleted\EXCLUIDO_{nickname}.dat";
 
+                //Verificando se o caminho existe..
+                if (!File.Exists(CaminhoNicknameChar))
+                {
+                    return "Erro : Esse personagem não existe.";
+                }
+
                 //Listando todos os nicks dos personagens..
                 Personagem[] Nicks = ListarNicks();
 
@@ -248,7 +254,7 @@ namespace Business
 
             //Capturando um ou todos personagens..
             var Search = from p in Nicks
-                         where ((string.IsNullOrEmpty(nickname)) || (!string.IsNullOrEmpty(nickname) && p.Nickname.Equals(nickname)))
+                         where (((string.IsNullOrEmpty(nickname)) && (!string.IsNullOrEmpty(p.Nickname))) || ((!string.IsNullOrEmpty(nickname)) && (!string.IsNullOrEmpty(p.Nickname)) && (p.Nickname.Equals(nickname))))
                          select p;
 
             //Carregando personagem..
@@ -356,7 +362,7 @@ namespace Business
             if (BytesChar.Length > 0)
             {
                 //Instânciando o personagem...
-                int Classe = Convert.ToInt32((BytesChar[0xc4]));
+                int Classe = (p.NumeroClasse != 0) ? p.NumeroClasse : Convert.ToInt32((BytesChar[0xc4]));
 
                 //Recebendo a classe..
                 Personagem = New(Classe);
@@ -420,6 +426,6 @@ namespace Business
             }
 
             return Personagem;
-        } 
+        }
     }
 }

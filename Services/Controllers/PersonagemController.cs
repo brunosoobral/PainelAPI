@@ -185,13 +185,19 @@ namespace Services.Controllers
                 {
                     //Recebendo os dados desse usuário..
                     var bll = new PersonagemBLL(usuario: u);
-                    var p = bll.GetPersonagem(nickname);
+                    var Personagens = bll.GetPersonagem(nickname);
 
                     //Verificando se o objeto foi carregado..
-                    if (p != null)
+                    if (Personagens != null)
                     {
-                        //retornar mensagem de sucesso.. 
-                        return Request.CreateResponse(HttpStatusCode.OK, p);
+                        //Verificando se existe personagem..
+                        return ((from p in Personagens
+                                 where (!string.IsNullOrWhiteSpace(p.Nickname))
+                                 select p).Count() > 0)
+                            //retornar mensagem de sucesso.. 
+                            ? Request.CreateResponse(HttpStatusCode.OK, Personagens)
+                            //retornar mensagem de sem personagem.. 
+                            : Request.CreateResponse(HttpStatusCode.Forbidden, "Nenhum personagem foi criado.");
                     }
                     else
                     {
