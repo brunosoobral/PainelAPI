@@ -60,7 +60,7 @@ namespace Business
                 };
 
             //Tier 4
-            Tier3 = new Magias[] {
+            Tier4 = new Magias[] {
                     new Magias { Valor = 1, Nome = "Hall Of Valhalla" },
                     new Magias { Valor = 1, Nome = "Extreme Rage" },
                     new Magias { Valor = 1, Nome = "Frost Javelin" },

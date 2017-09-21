@@ -58,13 +58,16 @@ namespace Business
                 //Listando todos os nicks vinculados no login.
                 Personagem[] Nicks = ListarNicks();
 
-                //Verificando a quantidade de nicks
-                int Quantidade = (from c in Nicks
-                                  where (!string.IsNullOrWhiteSpace(c.Nickname))
-                                  select c).Count();
+                //Deixando só nicks com espaço em branco..
+                Nicks = Nicks.Where(n => (string.IsNullOrWhiteSpace(n.Nickname))).ToArray();
 
-                //Verificando a quantidade.
-                if (Quantidade < 5)
+                //Verificando a quantidade de nicks
+                /*int Quantidade = (from c in Nicks
+                                  where (!string.IsNullOrWhiteSpace(c.Nickname))
+                                  select c).Count();*/
+
+                //Verificando a quantidade > 0 tem espaço.
+                if (Nicks.Count() > 0)
                 {
                     foreach (Personagem Nick in Nicks)
                     {
@@ -301,6 +304,7 @@ namespace Business
                 new Personagem { Login = this.Usuario.Login, PosicaoInfoDAT = 176, Nickname = Array.Substring(0xb0, 15).Trim('\x00') }
             };
 
+            //Varrendo nicks vazios..
             return Personagens;
         }
 
