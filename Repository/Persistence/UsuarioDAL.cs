@@ -10,6 +10,12 @@ using Entities;
 
 namespace Repository.Persistence
 {
+    /*-----------------------------------------
+        Autor:      Bruno Sobral                  
+        Skype:      bruno.soobral
+        E-mail:     bruno.soobral@gmail.com
+    -----------------------------------------*/
+
     public class UsuarioDAL : Conexoes, IUsuario
     {
         public Usuario ObterPorLoginSenha(Usuario u)

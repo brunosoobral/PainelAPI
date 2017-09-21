@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IPersonagem.cs" />
     <Compile Include="Interfaces\IUsuario.cs" />
+    <Compile Include="Persistence\PersonagemDAL.cs" />
     <Compile Include="Persistence\UsuarioDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Conexoes.cs" />

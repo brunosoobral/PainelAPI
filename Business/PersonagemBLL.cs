@@ -7,6 +7,7 @@ using Entities;
 using Util;
 using System.Configuration;
 using System.IO;
+using Repository.Persistence;
 
 namespace Business
 {
@@ -19,11 +20,13 @@ namespace Business
     public class PersonagemBLL
     {
         private Usuario Usuario { get; set; }
+        private PersonagemDAL Repository { get; set; }
 
         public PersonagemBLL(Usuario usuario)
         {
             this.Usuario = usuario;
             this.Usuario.Diretorio = Funcoes.Diretorio(usuario.Login);
+            this.Repository = new PersonagemDAL();
         }
 
         //Criando personagem..
@@ -426,7 +429,8 @@ namespace Business
                 Personagem.PontosRestanteEP = (TotalPontosDisponivelEP - QtdTier4);
 
                 //Carregando clan do usuário..
-                //Criar no repositório..
+                string Clan = this.Repository.RetornaClan(Personagem);
+                Personagem.Clan = (!string.IsNullOrEmpty(Clan)) ? Clan : "Sem Clan";
             }
 
             return Personagem;
